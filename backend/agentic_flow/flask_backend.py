@@ -1,4 +1,5 @@
 from flask import Flask, render_template,request,jsonify
+import base64, uuid, os
 
 # from langchainFlow1 import get_answer
 # from ollama_ap import get_answer
@@ -56,16 +57,50 @@ def home():
 #     elif not image_path:
 #         return "No wafer selected. Please select a wafer image."
 
+# @app.route('/get-answer', methods=['POST'])
+# def run_agent():
+#     question = request.args.get('question')
+#     image_path = request.args.get('image_path')
+
+#     if not image_path:
+#         return jsonify({"error": "No wafer selected. Please select a wafer image."}), 400
+#     if not question:
+#         return jsonify({"error": "No question provided."}), 400
+
+#     # Log the current time (before analysis starts)
+#     start_time = time.time()
+
+#     # Run the async wafer analysis
+#     result = asyncio.run(get_answer(question, image_path))
+
+#     # After getting the result, check for new processed image
+#     new_image_path = get_new_processed_image(start_time)
+
+#     response = {
+#         "result": result,
+#         "image_path": new_image_path
+#     }
+#     print(f"Response: {response}")
+#     return jsonify(response)
 @app.route('/get-answer', methods=['POST'])
 def run_agent():
     question = request.args.get('question')
-    image_path = request.args.get('image_path')
+    image_b64 = request.args.get('image_b64')
+    category = request.args.get('category')
 
-    if not image_path:
+    if not image_b64:
         return jsonify({"error": "No wafer selected. Please select a wafer image."}), 400
     if not question:
         return jsonify({"error": "No question provided."}), 400
 
+    # Save image to disk
+    save_dir = 'saved_images'
+    os.makedirs(save_dir, exist_ok=True)
+    prefix = 'sem_' if category and 'sem' in category.lower() else ''
+    image_path = os.path.join(save_dir, f"{prefix}{uuid.uuid4()}.png")
+    with open(image_path, 'wb') as f:
+        f.write(base64.b64decode(image_b64))
+    print(image_path)
     # Log the current time (before analysis starts)
     start_time = time.time()
 
