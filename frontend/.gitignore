@@ -1,0 +1,11 @@
+# Ignore processed_image folder
+processed_image/
+
+# Ignore Python cache directories
+__pycache__/
+*.py[cod]
+
+# Ignore all .log files
+*.log
+.ipynb_checkpoints/
+reports/

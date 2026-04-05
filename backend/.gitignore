@@ -1,0 +1,11 @@
+# Ignore processed_image folder
+processed_image/
+
+# Ignore Python cache directories
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+# Ignore all .log files
+*.log
+models/
+agentic_flow/plots/
