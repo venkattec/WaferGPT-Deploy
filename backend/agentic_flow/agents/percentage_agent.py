@@ -45,7 +45,9 @@ def defect_percentage_tool(image_path: str, question: str) -> Dict[str, Any]:
 
         if "sem" in image_path:
             return {"result":"The defect percentage cannot be calculated for SEM images.", "image_path": image_path}
-        defect_percentage,output_image = detect_defects(npy_path=change_file_path(image_path))
+        # defect_percentage,output_image = detect_defects(npy_path=change_file_path(image_path))
+        defect_percentage,output_image = detect_defects(image_path=image_path)
+
         log_tool_result(tool_name, str(defect_percentage))
         # return str(defect_percentage)
         return {"result": defect_percentage, "image_path": output_image}

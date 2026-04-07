@@ -1,7 +1,8 @@
 import logging,os
-import numpy as np
 from typing import Any, Dict
-
+import numpy as np
+from PIL import Image
+from matplotlib import cm
 # Assumes your state models and base agent are in these locations
 from models.state import AgentState, ClassificationData
 from agents.tools.sem_inference import predict
@@ -23,6 +24,36 @@ def log_tool_result(tool_name, result):
     """Placeholder for your logging function."""
     logging.info(f"Tool Result: {tool_name} | Result: {result}")
 
+def build_viridis_lut():
+    lut = {}
+    for i in range(256):
+        rgb = tuple((np.array(cm.viridis(i / 255)[:3]) * 255).astype(np.uint8))
+        lut[rgb] = i / 255.0
+    return lut
+
+lut = build_viridis_lut()  # build once, reuse for all images
+
+def load_from_png(png_path):
+    img = Image.open(png_path)
+
+    # Reverse the 10x upscale
+    original_size = (img.width // 10, img.height // 10)
+    img_small = img.resize(original_size, Image.NEAREST)
+
+    pixels = np.array(img_small)
+
+    # Reverse viridis colormap → normalized float array
+    h, w = pixels.shape[:2]
+    array = np.zeros((h, w), dtype=np.float64)
+    for y in range(h):
+        for x in range(w):
+            rgb = tuple(pixels[y, x, :3])
+            array[y, x] = lut.get(rgb, 0.0)
+
+    # Match the npy pipeline exactly
+    array = np.expand_dims(array, -1)   # (H, W) -> (H, W, 1)
+    image = np.array([array])            # (H, W, 1) -> (1, H, W, 1)
+    return image
 
 # def predict(image_path: str) -> Dict[str, Any]:
 #     """Placeholder for your SEM image classification model."""
@@ -52,10 +83,11 @@ def defect_classification_tool(image_path: str, question: str) -> Dict[str, Any]
         if "sem" in image_path:
             output = predict(image_path)
         else:
-            image_path = change_file_path(image_path)
-            array = np.load(image_path, allow_pickle=True)
-            array = np.expand_dims(array, -1)
-            image = np.array([array])
+            # image_path = change_file_path(image_path)
+            # array = np.load(image_path, allow_pickle=True)
+            # array = np.expand_dims(array, -1)
+            # image = np.array([array])
+            image = load_from_png(image_path)  # Load and convert PNG back to the expected format
             output = find_defects(image)
 
         log_tool_result(tool_name, str(output))

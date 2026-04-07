@@ -60,7 +60,9 @@ def defect_localize_tool(image_path: str, question: str) -> Dict[str, Any]:
         if "sem" in image_path:
             output, output_image = locate_sem_defect(image_path)
         else:
-            output, output_image = detect_and_localize_defects(npy_path=change_file_path(image_path))
+            # output, output_image = detect_and_localize_defects(npy_path=change_file_path(image_path))
+            output, output_image = detect_and_localize_defects(image_path=image_path)
+
 
         result = {"result": output, "image_path": output_image}
         log_tool_result(tool_name, str(result))

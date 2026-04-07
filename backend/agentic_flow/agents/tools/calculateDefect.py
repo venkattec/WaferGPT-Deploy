@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 from agents.tools.describeDefect import describe_defect_percentage
+# from describeDefect import describe_defect_percentage,no_defect
+
 import uuid,os
 def detect_defects(npy_path=None, image_path=None, threshold=200, min_area=500, size=(520, 520)):
     """
@@ -97,8 +99,9 @@ def detect_defects(npy_path=None, image_path=None, threshold=200, min_area=500, 
 
 if __name__ == "__main__":
     # Example usage
-    npy_path = "npy_files/image1.npy"  # Replace with the path to your `.npy` file
-    print(detect_defects(npy_path, threshold=200, min_area=500))  # Adjust `min_area` as needed
+    npy_path = "D:/WaferGPT-Deploy/backend/npy_files/image1.npy"  # Replace with the path to your `.npy` file
+    img_path = "D:/WaferGPT-Deploy/backend/png_files/image1.png"  # Replace with the path to your image file
+    print(detect_defects(image_path=img_path, threshold=200, min_area=500))  # Adjust `min_area` as needed
 
     # img_path = "output_image.png"
     # print(detect_defects(image_path=img_path))
