@@ -110,9 +110,14 @@ def run_agent():
     # After getting the result, check for new processed image
     new_image_path = get_new_processed_image(start_time)
 
+    # Read image and convert to base64
+    with open(new_image_path, "rb") as img_file:
+        image_b64 = base64.b64encode(img_file.read()).decode("utf-8")
+    
     response = {
         "result": result,
-        "image_path": new_image_path
+        "image_path": new_image_path,
+        "image_b64": image_b64
     }
     print(f"Response: {response}")
     return jsonify(response)

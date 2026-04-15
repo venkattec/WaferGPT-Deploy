@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 import os
 # Import the shared state definition from your models package
-from models.state import AgentState
+from data_models.state import AgentState
 
 # --- 1. LLM Configuration (Updated for Ollama) ---
 # We specify the model and tell it to always output in JSON format.

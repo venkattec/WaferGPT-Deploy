@@ -5,7 +5,7 @@ from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
 # Import the shared state definition from your models package
-from models.state import AgentState
+from data_models.state import AgentState
 
 # --- 1. LLM Configuration ---
 # This can be defined here or imported from a central config file.

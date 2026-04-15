@@ -2,7 +2,7 @@ import logging,os
 from typing import Any, Dict, List, Tuple
 
 # Assumes your state models and base agent are in these locations
-from models.state import AgentState, LocalizationData, DefectLocation
+from data_models.state import AgentState, LocalizationData, DefectLocation
 from agents.tools.localizeDefect import detect_and_localize_defects
 from agents.tools.locate_sem import locate_sem_defect
 from .base import BaseAgent

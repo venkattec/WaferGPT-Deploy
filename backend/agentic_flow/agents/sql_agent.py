@@ -6,7 +6,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_openai import ChatOpenAI # Changed from Ollama
 from .base import BaseAgent
-from models.state import AgentState, SQLAnalysisData
+from data_models.state import AgentState, SQLAnalysisData
 from dotenv import load_dotenv
 from matplotlib import pyplot as plt
 import pandas as pd

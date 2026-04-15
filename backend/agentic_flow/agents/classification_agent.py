@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 from matplotlib import cm
 # Assumes your state models and base agent are in these locations
-from models.state import AgentState, ClassificationData
+from data_models.state import AgentState, ClassificationData
 from agents.tools.sem_inference import predict
 from agents.tools.visualTransformer import find_defects
 from .base import BaseAgent

@@ -2,7 +2,7 @@ import logging,os
 from typing import Any, Dict
 
 # Assumes your state models and base agent are in these locations
-from models.state import AgentState, PercentageData
+from data_models.state import AgentState, PercentageData
 from agents.tools.calculateDefect import detect_defects
 from .base import BaseAgent
 

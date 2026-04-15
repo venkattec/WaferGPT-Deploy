@@ -8,7 +8,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.llms import Ollama
 
 # 1. Import State and the Planner
-from models.state import AgentState
+from data_models.state import AgentState
 # We only need the planner, not the old orchestrator node
 from router.ollama_orchestrator import planner
 

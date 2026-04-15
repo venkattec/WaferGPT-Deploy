@@ -1,5 +1,6 @@
 FROM python:3.10-slim
 WORKDIR /app
+RUN mkdir -p /app/processed_image
 # Install system dependencies for ML if needed (e.g., libgomp1)
 RUN apt-get update && apt-get install -y \
     git \

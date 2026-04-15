@@ -8,7 +8,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
 # 1. Import the State and Orchestrator
-from models.state import AgentState
+from data_models.state import AgentState
 from router.ollama_orchestrator import orchestrator_node,planner_node,router
 
 # 2. Import all the concrete agent classes

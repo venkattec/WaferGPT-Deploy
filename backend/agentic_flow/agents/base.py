@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict
 
 # Import the shared state definition from your models package
-from models.state import AgentState
+from data_models.state import AgentState
 
 
 class BaseAgent(ABC):

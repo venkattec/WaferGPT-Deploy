@@ -2,7 +2,7 @@ import logging
 from typing import Any, Dict
 
 # Assumes your state models and base agent are in these locations
-from models.state import AgentState, GeneralAnalysisData
+from data_models.state import AgentState, GeneralAnalysisData
 from agents.tools.github_llm import get_openai_response
 from .base import BaseAgent
 
